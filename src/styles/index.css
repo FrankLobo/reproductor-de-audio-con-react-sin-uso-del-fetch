@@ -14,42 +14,63 @@ body {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    /* background-color: rgb(0, 0, 0); */
+    background-color: rgb(0, 0, 0);
 
 }
-.maincontainer {
+/* .maincontainer {
     border-radius: 5px;
     color: rgb(180, 210, 200);
-}
-.container {
+} */
+.maincontainer {
+    width: 35rem;
+    height: 55rem;
     margin: 0 auto;
     margin-top: 20px;
+    padding: 0;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 0;
-    width: 35rem;
-    height: 55rem;
+    /* overflow: auto; */
     flex: 1 100%;
+    border-radius: 4px;
+    background-image: linear-gradient(to bottom, #032e4613 , #40818211, #58dbe211);
     box-shadow: 1px 4px 8px 5px rgba(149, 250, 253, 0.212);
 }
-.list {
+.container {
     height: 52em;
-    flex: 20 100%;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding: 0;
     margin: 0;
+    flex: 20 100%;
     background-image: linear-gradient(to bottom, #012e4713 , #4081822d, #58dbe21f);
     /* background-color: rgb(3, 5, 8); */
     overflow: auto;
 }
-.list::-webkit-scrollbar{
-    width: 10px;
+
+.container::-webkit-scrollbar{
+    width: 5px;
 }
-.list::-webkit-scrollbar-thumb{
-    background-color: rgba(4, 226, 255, 0.137);
-    border-radius: 2px;
+.container::-webkit-scrollbar-thumb{
+    background-color: rgba(4, 226, 255, 0.100);
+    border-top-right-radius: 5px;
 }
-ol {
+/* ol {
     padding: 5;
+} */
+
+.content-A {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: flex-end;
+}
+.content-B {
+    margin-left: 1.5rem;
+    text-align: justify;
+    align-items: flex-end;
+    display: flex;
+    justify-content: center;
 }
 .item::marker {
     vertical-align: middle;
@@ -57,12 +78,20 @@ ol {
 
 }
 .item {
+    color: rgb(152, 172, 158);
+    align-items:flex-start;
+    line-break: normal;
+    width: 100%;
     padding: 10px;
     border-bottom: 1px solid rgb(31, 42, 48);
 }
 .item:hover {
     padding: 10px;
     background-color: rgba(93, 145, 180, 0.082);
+}
+.item:active {
+    padding: 10px;
+    background-color: rgba(185, 227, 255, 0.226);
 }
 .footer{
     width: 100%;
@@ -71,9 +100,12 @@ ol {
     align-content: flex-end;
     justify-content: space-evenly;
     align-items: flex-end;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     background-color: rgb(10, 10, 10);
 }
 button{
+    display: flex;
     align-items: center;
     width: 50px;
     height: 50px;
