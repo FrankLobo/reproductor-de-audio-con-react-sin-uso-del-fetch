@@ -1,9 +1,8 @@
-import { element } from "prop-types";
-import React, { useEffect, useRef, useState } from "react";
-import { FooterAndButtons } from "./footerybotones.jsx";
+import React, { useRef, useState } from "react";
+import FooterAndButtons from "./footerybotones.jsx";
 
 const AudioLists = () => {
-	const [songs] = useState([
+	const [songs, setSongs] = useState([
 		{
 			id: 1,
 			cateory: "game",
@@ -132,29 +131,43 @@ const AudioLists = () => {
 		},
 	]);
 	const audioRef = useRef();
-	useEffect(() => {
-		audioRef.current = `https://assets.breatheco.de/apis/sound/${element.url}`;
-	}, []);
-	// const [isPlaying, setIsPlaying] = useState(false);
-	// useEffect(() => {
-	// 	if (isPlaying) {
-	// 		audioRef.current.play();
-	// 	} else {
-	// 		audioRef.current.pause();
-	// 	}
-	// }, []);
+	const [songsIndex, setSongsIndex] = useState(0);
+	const [isPlaying, setIsPlaying] = useState(false);
+
+	const selectIndexSong = (index) => {
+		audioRef.current.src = `https://assets.breatheco.de/apis/sound/${songs[index].url}`;
+	};
+	let playStop = () => {
+		audioRef.current.play();
+	};
+	let pauseSong = () => {
+		audioRef.current.pause();
+	};
+	const buttonAction = (element, index) => {
+		if (audioRef.current.src !== element.url) {
+			selectIndexSong(index);
+			setSongsIndex(index);
+		}
+		if (!isPlaying && audioRef.current.paused) {
+			playStop();
+			setIsPlaying(true);
+		} else {
+			pauseSong();
+			setIsPlaying(false);
+		}
+	};
 
 	return (
 		<>
 			<div className="maincontainer">
 				<div className="container">
-					<audio
-						ref={audioRef}
-						src={`https://assets.breatheco.de/apis/sound/${element.url}`}></audio>
-					{songs.map((element) => {
+					<audio ref={audioRef}></audio>
+					{songs.map((element, index) => {
 						return (
 							<button
-								// onClick={audioRef}
+								onClick={() => {
+									buttonAction(element, index);
+								}}
 								className="item"
 								key={element.id}>
 								<span className="content-A">{element.id}</span>
@@ -165,17 +178,22 @@ const AudioLists = () => {
 						);
 					})}
 				</div>
-				<FooterAndButtons />
+				<FooterAndButtons
+					ref={audioRef}
+					playicon="icon-play"
+					skipfowardicon="icon-skip-foward"
+					skipbackicon="icon-skip-back"
+					selectIndexSong={selectIndexSong}
+					songsIndex={songsIndex}
+					setSongsIndex={setSongsIndex}
+					playStop={playStop}
+					setIsPlaying={setIsPlaying}
+					isPlaying={isPlaying}
+					songs={songs}
+				/>
 			</div>
 		</>
 	);
 };
-{
-	/* <audio ref={audioRef}>
-	<source
-		src={`https://assets.breatheco.de/apis/sound/${element.url}`}
-		type="audio/mpeg"
-	/>
-</audio> */
-}
+
 export default AudioLists;
